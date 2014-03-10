@@ -77,11 +77,20 @@ while ($line=<IN>)
  $second=join(';',keys %out);
  %out=();
 
-
+ unless(defined $first && length $first)
+ {
+  $first="OUTSIDE";
+ }
+ unless(defined $second && length $second)
+ {
+  $second="OUTSIDE";
+ }
+ 
 
  %out=();
  @first=();
  @second=();
+
  print "c".$count."\t$line\t$first\t$second\n";
 }
 

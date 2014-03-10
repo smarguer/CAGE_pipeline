@@ -4,7 +4,7 @@ use Benchmark;
 use Data::Dumper;
 use POSIX qw(strftime);
 
-my $scriptp="/jurg/homedir/samuel/POMBE_SEQ/analysis/SCRIPTS/";
+my $scriptp="/jurg/homedir/samuel/POMBE_SEQ/analysis/SCRIPTS/CAGE_pipeline/";
 my %status = ();
 my $n = 1;
 my @command=@ARGV;
@@ -12,11 +12,11 @@ my @command=@ARGV;
 my $use = "\nUse:\n-gp: gff path (/jurg/homedir/samuel/POMBE_SEQ/analysis/)\n-qp: mapped reads files path (default current directory)\n-g1: gff used for mapping (default gff_090511.txt)\n-g2: gff to be used for UTR call (default gff_090511.txt)\n-r1: read 1 file name (no default)\n-r2: read 2 file name (no default)\n-m: paraclu lower cluster signal limit (default = 30)\n\n";
 
 ##-gp
-my $gffp = "/jurg/homedir/samuel/POMBE_SEQ/analysis/";
+my $gffp = "/jurg/group/SAM_RNA-SEQ_PIPELINE/ANNOT/";
 ##-qp
 my $fastqp = "./";
 ##-g
-my $gff1 = "gff_090511.txt";
+my $gff1 = "gff_011112.txt";
 my $gff2 = "gff_090511.txt";
 ##-r1
 my $read1;
@@ -94,7 +94,7 @@ my $now = localtime;
 print "\nCommand: $0 @command\n\ndate: $now\n\n";
 
 
-my $debug=1;
+my $debug=0;
 
 if ($debug==0)
 {
@@ -107,7 +107,7 @@ $status{$n}=system "perl ".$scriptp."filterCAGE.pl ".$read1.'.fused';
 die "Problem stage $n" if $status{$n}; $n++;
 
 print "running paraclu\n";
-$status{$n}=system '~/POMBE_SEQ/analysis/CAGE/paraclu-5/paraclu '.$minClust.' '.$read1.'.fused.filtered.paracluIN > '.$read1.'.fused.filtered.paracluOUT';
+$status{$n}=system '/jurg/homedir/samuel/POMBE_SEQ/analysis/SCRIPTS/CAGE_pipeline/paraclu-9/paraclu '.$minClust.' '.$read1.'.fused.filtered.paracluIN > '.$read1.'.fused.filtered.paracluOUT';
 die "Problem stage $n" if $status{$n}; $n++;
 
 print "filtering paraclu output (removing clusters of length > 500nt, with density ratio < 2x, or included in larger ones\n";
@@ -119,7 +119,7 @@ $status{$n}=system "perl ".$scriptp."mapCAGEclusters.pl ".$read1.'.fused.filtere
 die "Problem stage $n" if $status{$n}; $n++;
 
 print "Creating results table\n";
-$status{$n}=system "perl ".$scriptp."createCAGEtable.pl ".$read1.'.CAGEmap '.$gff2.' > '.$read1.'.CAGEtable';
+$status{$n}=system "perl ".$scriptp."createCAGEtable.pl ".$read1.'.CAGEmap '.$gffp.$gff2.' > '.$read1.'.CAGEtable';
 die "Problem stage $n" if $status{$n}; $n++;
 }
 

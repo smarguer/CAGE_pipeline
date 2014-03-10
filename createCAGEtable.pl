@@ -30,7 +30,7 @@ if (@ARGV != 2) {die 'I need a paraclu mapped file  and a gff file';}
 (my $in,my $gff)=@ARGV;
 
 open (IN, $in) or die 'could not find the paraclu output';
-open (GFF, $gff) or die 'could not find the fused file output';
+open (GFF, $gff) or die 'could not find the gff file';
 my $line1=<GFF>;
 
 ######################################

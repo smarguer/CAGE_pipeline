@@ -18,7 +18,8 @@ open (IN2, $in2) or die 'could not find the read 2 read annotation';
 open (IN3, $in3) or die 'could not find the read 1 read annotation';
 
 $in1 =~ s{.*/}{};
-open (OUT, ">", './'.$in1.'.fused') or die 'could not open output file...';
+#open (OUT, ">", './'.$in1.'.fused') or die 'could not open output file...';
+open (OUT, ">", $in1.'.fused') or die 'could not open output file...';
 
 #######################
 #variables
