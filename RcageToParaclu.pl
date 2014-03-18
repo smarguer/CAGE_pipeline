@@ -3,16 +3,16 @@
 use strict;
 use warnings;
 
-my $line;
-my $count=0;
-my @holder;
 
 if (@ARGV != 1) {die "wrong number of files";}
 (my $in)=@ARGV;
 
 open (IN, $in) or die 'could not find the input file';
 
-my %chr=("chrI" => 1, "chrII" => 2,"chrIII" => 3, "chrMT" => 4, "chrAB325691" => 6);
+my $line=<IN>;
+my $count=0;
+my @holder;
+my %chr=("chrI" => 1, "chrII" => 2,"chrIII" => 3, "chrMT" => 4, "chrMTR" => 5, "chrAB325691" => 6);
 
 while ($line=<IN>)
  {
