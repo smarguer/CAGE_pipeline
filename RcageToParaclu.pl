@@ -20,7 +20,7 @@ while ($line=<IN>)
   chomp ($line);
 
   @holder = split (/\t/, $line);
-  print "$chr{$holder[1]}\t$holder[4]\t$holder[2]\t$holder[3]\t$holder[0]\t$holder[5]\t$holder[11]\n"  
+  print "$chr{$holder[1]}\t$holder[4]\t$holder[2]\t$holder[3]\t$holder[0]\t$holder[5]\t$holder[6]\n"  
 
  }
 
