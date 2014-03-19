@@ -6,6 +6,7 @@ use warnings;
 my $line;
 my $count=0;
 my @holder;
+my $gene;
 my %out;
 
 if (@ARGV != 1) {die "wrong number of files";}
