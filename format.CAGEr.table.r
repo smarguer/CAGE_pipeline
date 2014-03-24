@@ -1,0 +1,10 @@
+format.CAGEr.table=function(m,cl,name)
+{
+ a=read.delim(m,stringsAsFactors=F,header=F)
+ b=read.delim(cl,stringsAsFactors=F)
+ out=cbind(a,b)
+ out=out[,c(1,2,12,3,4,5,6,9,10,16:22)]
+ colnames(out)=c("name","chr","seq","strand","start","end","cluster","tag_1","tag_2","nr_ctss","dominant_ctss","tpm","tpm.dominant_ctss","q_0.1","q_0.9","interquantile_width")
+write.table(out,file=name,sep="\t",quote=F,row.names=F)
+return(out)
+}
